@@ -1,0 +1,58 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: fu-app
+  description: Microservicio para subida de archivos
+  license:
+    name: fu-ms
+host: 192.168.99.101:3000
+basePath: /
+schemes:
+  - http
+consumes: 
+  - application/json
+produces:
+  - application/json
+paths:
+  /posts:
+    post:
+      summary: "subida de archivos"
+      consumes:
+         - multipart/form-data
+      parameters:
+         - in: formData
+           name: uploads[]
+           type: file
+           description: The files to upload.
+         - in: formData
+           name: name
+           type: string
+           description: descripcion de archivo
+         - in: formData
+           name: owner
+           type: string
+           description: dueno de archivo
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: nombre de archivos
+              owner:
+                type: string
+                description: dueno de archivos
+              path:
+                type: string
+                description: ruta de archivos
+              id:
+                type: integer
+                description: id de posts
+        '404':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+
+          
